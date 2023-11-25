@@ -23,23 +23,23 @@ class _LoginState extends State<Login> {
   String password = '';
   String errorMessage = '';
   String emailErrorMessage = '';
-  clearMessage() => emailErrorMessage = '';
+  String passErrorMessage = '';
+  clearMessage() {
+    emailErrorMessage = '';
+    passErrorMessage = '';
+  }
 
-  onChange(String value) {
-    email = value;
-    password = value;
-    print('$value');
-    clearMessage();
+  final emailCtr = TextEditingController();
+  final passCtr = TextEditingController();
+
+  onChange() {
     setState(() {
-      if (email.isEmpty) {
-        emailErrorMessage = 'kkkkk';
-      }
+      emailErrorMessage = emailCtr.text.isEmpty ? 'kkkkk' : '';
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -51,14 +51,14 @@ class _LoginState extends State<Login> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                margin: EdgeInsets.fromLTRB(18, 5, 12, 12),
+                margin: const EdgeInsets.fromLTRB(18, 5, 12, 12),
                 child: const Text(
                   'Login',
                   style: TextStyle(color: Colors.blue, fontSize: 34),
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(left: 18),
+                margin: const EdgeInsets.only(left: 18),
                 child: const Text(
                   'welcome back. Please Login!',
                   style: TextStyle(color: Colors.blue, fontSize: 20),
@@ -66,11 +66,45 @@ class _LoginState extends State<Login> {
               ),
               Container(
                 margin: const EdgeInsets.fromLTRB(18, 25, 18, 18),
-                child: formField('Email', 'Nhập Email', Icons.mail),
+                child: formField(
+                  controller: emailCtr,
+                  name: 'Email',
+                  text: 'Nhập Email',
+                  icon: Icons.mail,
+                  onChanged: (value) {
+                    onChange();
+                  },
+                ),
+              ),
+              if (emailErrorMessage.isNotEmpty)
+                Container(
+                  padding: const EdgeInsets.only(left: 10),
+                  child: Text(
+                    emailErrorMessage,
+                    style: TextStyle(color: Colors.red),
+                  ),
+                ),
+              Container(
+                margin: const EdgeInsets.fromLTRB(18, 25, 18, 18),
+                child: formField(
+                  controller: passCtr,
+                  name: 'Pass',
+                  text: 'Nhập Pass',
+                  icon: Icons.mail,
+                  onChanged: (value) {
+                    onChange();
+                    // setState(() {
+                    //   passErrorMessage = value.isEmpty ? 'passs' : '';
+                    // });
+                  },
+                ),
               ),
               Container(
-                margin: const EdgeInsets.symmetric(horizontal: 18),
-                child: formField('Password', "Nhập password", Icons.shield),
+                padding: const EdgeInsets.only(left: 10),
+                child: Text(
+                  passErrorMessage,
+                  style: TextStyle(color: Colors.red),
+                ),
               ),
               Container(
                 margin: const EdgeInsets.only(top: 20, bottom: 9),
@@ -160,11 +194,17 @@ class _LoginState extends State<Login> {
     );
   }
 
-  Widget formField(String name, String text, IconData icon) {
+  Widget formField(
+      {required String name,
+      required TextEditingController controller,
+      required String text,
+      required IconData icon,
+      required ValueChanged<String>? onChanged}) {
     return Column(
       children: [
         TextFormField(
-          onChanged: (value) => onChange(value),
+          controller: controller,
+          onChanged: onChanged,
           // email = value;
           // password = value;
           // if (email.isEmpty || password.isEmpty) {
@@ -205,11 +245,6 @@ class _LoginState extends State<Login> {
             prefixIcon: Icon(icon),
           ),
         ),
-        if (emailErrorMessage.isNotEmpty)
-          Text(
-            emailErrorMessage,
-            style: TextStyle(color: Colors.red),
-          )
       ],
     );
   }
