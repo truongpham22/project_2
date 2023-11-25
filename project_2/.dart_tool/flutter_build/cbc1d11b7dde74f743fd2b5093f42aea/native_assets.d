@@ -1,1 +1,0 @@
- /Users/admin/Documents/VanSen/project_2/project_2/.dart_tool/flutter_build/cbc1d11b7dde74f743fd2b5093f42aea/native_assets.yaml: 
