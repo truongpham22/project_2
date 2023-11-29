@@ -1,9 +1,14 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:project_2/model/api_response_list.dart';
+import 'package:project_2/model/product/product.dart';
+
 import 'package:project_2/signUp.dart';
 
 void main() {
   runApp(
-    MaterialApp(
+    const MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: const Login(),
     ),
   );
@@ -24,13 +29,41 @@ class _LoginState extends State<Login> {
   String errorMessage = '';
   String emailErrorMessage = '';
   String passErrorMessage = '';
+  var listData = <ProductModel>[];
+  final dio = Dio();
   clearMessage() {
     emailErrorMessage = '';
     passErrorMessage = '';
   }
 
+  @override
+  void initState() {
+    listPro();
+    // TODO: implement initState
+    super.initState();
+  }
+
   final emailCtr = TextEditingController();
   final passCtr = TextEditingController();
+
+  Future<APIResponseList<ProductModel>> list() async {
+    final response = await dio.get('https://dummyjson.com/products');
+
+    Map<String, dynamic> json = response.data;
+
+    return APIResponseList.fromJson(
+      json,
+      (json) => ProductModel.fromJson(json as Map<String, dynamic>),
+    );
+  }
+
+  listPro() async {
+    final response = await list();
+    print('total:;${response.products}');
+    final result = response.products ?? [];
+
+    listData.addAll(result);
+  }
 
   onChange() {
     setState(() {
@@ -45,152 +78,169 @@ class _LoginState extends State<Login> {
       appBar: AppBar(
         title: const Text('Login Form'),
       ),
-      body: Form(
-          key: scaffoldKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                margin: const EdgeInsets.fromLTRB(18, 5, 12, 12),
-                child: const Text(
-                  'Login',
-                  style: TextStyle(color: Colors.blue, fontSize: 34),
+      body: SafeArea(
+        child: Form(
+            key: scaffoldKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  margin: const EdgeInsets.fromLTRB(18, 5, 12, 12),
+                  child: const Text(
+                    'Login',
+                    style: TextStyle(color: Colors.blue, fontSize: 34),
+                  ),
                 ),
-              ),
-              Container(
-                margin: const EdgeInsets.only(left: 18),
-                child: const Text(
-                  'welcome back. Please Login!',
-                  style: TextStyle(color: Colors.blue, fontSize: 20),
+                Container(
+                  margin: const EdgeInsets.only(left: 18),
+                  child: const Text(
+                    'welcome back. Please Login!',
+                    style: TextStyle(color: Colors.blue, fontSize: 20),
+                  ),
                 ),
-              ),
-              Container(
-                margin: const EdgeInsets.fromLTRB(18, 25, 18, 18),
-                child: formField(
-                  controller: emailCtr,
-                  name: 'Email',
-                  text: 'Nhập Email',
-                  icon: Icons.mail,
-                  onChanged: (value) {
-                    onChange();
-                  },
+                Container(
+                  margin: const EdgeInsets.fromLTRB(18, 25, 18, 18),
+                  child: formField(
+                    controller: emailCtr,
+                    name: 'Email',
+                    text: 'Nhập Email',
+                    icon: Icons.mail,
+                    onChanged: (value) {
+                      onChange();
+                    },
+                  ),
                 ),
-              ),
-              if (emailErrorMessage.isNotEmpty)
+                if (emailErrorMessage.isNotEmpty)
+                  Container(
+                    padding: const EdgeInsets.only(left: 10),
+                    child: Text(
+                      emailErrorMessage,
+                      style: TextStyle(color: Colors.red),
+                    ),
+                  ),
+                Container(
+                  margin: const EdgeInsets.fromLTRB(18, 25, 18, 18),
+                  child: formField(
+                    controller: passCtr,
+                    name: 'Pass',
+                    text: 'Nhập Pass',
+                    icon: Icons.mail,
+                    onChanged: (value) {
+                      onChange();
+                      // setState(() {
+                      //   passErrorMessage = value.isEmpty ? 'passs' : '';
+                      // });
+                    },
+                  ),
+                ),
                 Container(
                   padding: const EdgeInsets.only(left: 10),
                   child: Text(
-                    emailErrorMessage,
-                    style: TextStyle(color: Colors.red),
+                    passErrorMessage,
+                    style: const TextStyle(color: Colors.red),
                   ),
                 ),
-              Container(
-                margin: const EdgeInsets.fromLTRB(18, 25, 18, 18),
-                child: formField(
-                  controller: passCtr,
-                  name: 'Pass',
-                  text: 'Nhập Pass',
-                  icon: Icons.mail,
-                  onChanged: (value) {
-                    onChange();
-                    // setState(() {
-                    //   passErrorMessage = value.isEmpty ? 'passs' : '';
-                    // });
-                  },
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.only(left: 10),
-                child: Text(
-                  passErrorMessage,
-                  style: TextStyle(color: Colors.red),
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.only(top: 20, bottom: 9),
-                child: Center(child: button('Login', 22, context)),
-              ),
-              Container(
-                margin: const EdgeInsets.only(top: 14),
-                child: const Center(
-                  child: Text(
-                    'forgot your password',
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Color.fromARGB(
-                        255,
-                        182,
-                        180,
-                        180,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.only(top: 80),
-                child: const Center(
-                    child: Text(
-                  'or Connect with',
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Color.fromARGB(
-                      255,
-                      182,
-                      180,
-                      180,
-                    ),
-                  ),
-                )),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  loginElse('Facebook', Colors.blue, Icons.facebook),
-                  const SizedBox(
-                    width: 20,
-                  ),
-                  loginElse('Twister', const Color.fromARGB(255, 25, 98, 159),
-                      Icons.people_outline),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    margin: const EdgeInsets.only(top: 20, right: 20),
-                    child: const Text(
-                      'Don\'t have account?',
-                      style: TextStyle(
-                        color: Color.fromARGB(
-                          255,
-                          182,
-                          180,
-                          180,
+                Column(
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.only(top: 20, bottom: 9),
+                      child: Center(
+                        child: button(
+                          'Login',
+                          22,
+                          context,
+                          () {
+                            // signUp();
+                          },
                         ),
                       ),
                     ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const SignUpScreen()),
-                      );
-                    },
-                    child: Container(
-                      margin: const EdgeInsets.only(top: 20),
-                      child: const Text(
-                        'Sign up',
-                        style: TextStyle(color: Colors.blue),
+                    Container(
+                      margin: const EdgeInsets.only(top: 14),
+                      child: const Center(
+                        child: Text(
+                          'forgot your password',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Color.fromARGB(
+                              255,
+                              182,
+                              180,
+                              180,
+                            ),
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              )
-            ],
-          )),
+                    Container(
+                      // margin: const EdgeInsets.only(top: 80),
+                      child: const Center(
+                          child: Text(
+                        'or Connect with',
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Color.fromARGB(
+                            255,
+                            182,
+                            180,
+                            180,
+                          ),
+                        ),
+                      )),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        loginElse('Facebook', Colors.blue, Icons.facebook),
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        loginElse(
+                            'Twister',
+                            const Color.fromARGB(255, 25, 98, 159),
+                            Icons.people_outline),
+                      ],
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.only(top: 20, right: 20),
+                      child: const Text(
+                        'Don\'t have account?',
+                        style: TextStyle(
+                          color: Color.fromARGB(
+                            255,
+                            182,
+                            180,
+                            180,
+                          ),
+                        ),
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const SignUpScreen()),
+                        );
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.only(top: 20),
+                        child: const Text(
+                          'Sign up',
+                          style: TextStyle(color: Colors.blue),
+                        ),
+                      ),
+                    ),
+                  ],
+                )
+              ],
+            )),
+      ),
     );
   }
 
@@ -249,7 +299,8 @@ class _LoginState extends State<Login> {
     );
   }
 
-  Widget button(String text, double n, BuildContext context) {
+  Widget button(
+      String text, double n, BuildContext context, VoidCallback action) {
     return Container(
       width: 200,
       height: 40,
@@ -264,13 +315,7 @@ class _LoginState extends State<Login> {
         ],
       ),
       child: ElevatedButton(
-        onPressed: () {
-          // if (scaffoldKey.currentState!.validate()) {
-          //   ScaffoldMessenger.of(context).showSnackBar(
-          //     const SnackBar(content: Text('Processing Data')),
-          //   );
-          // }
-        },
+        onPressed: () => action(),
         style: ButtonStyle(
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(
