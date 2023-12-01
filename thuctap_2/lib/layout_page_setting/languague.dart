@@ -11,7 +11,7 @@ class Languages extends StatefulWidget {
 
 class _LanguagesState extends State<Languages> {
   widgetLogin bc = widgetLogin();
-  int select = 0;
+  int selected = -1;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,6 +26,7 @@ class _LanguagesState extends State<Languages> {
             GestureDetector(
               onTap: () {
                 setState(() {
+                  selected = 1;
                   bool isCheck = !bc.isChecked1;
                   bc.isChecked1 = isCheck;
                   print('viet:: $isCheck');
@@ -33,7 +34,7 @@ class _LanguagesState extends State<Languages> {
               },
               child: infoLanguages(
                   index: 1,
-                  check: bc.isChecked1,
+                  // check: bc.isChecked1,
                   name: "Vietnamese",
                   icon: const Icon(
                     Icons.check,
@@ -44,16 +45,15 @@ class _LanguagesState extends State<Languages> {
             GestureDetector(
               onTap: () {
                 setState(() {
+                  selected = 2;
                   bool isCheck = !bc.isChecked2;
                   bc.isChecked2 = isCheck;
-                  select == 3;
-                  print('$select');
+                  print('engg:: $isCheck');
                 });
               },
               child: infoLanguages(
                   index: 2,
-                  // select: sl,
-                  check: select == 3 ? bc.isChecked2 : false,
+                  // check: bc.isChecked2,
                   name: "English",
                   icon: const Icon(
                     Icons.check,
@@ -66,21 +66,18 @@ class _LanguagesState extends State<Languages> {
                 setState(() {
                   bool isCheck = !bc.isChecked3;
                   bc.isChecked3 = isCheck;
-                  select == 2;
+                  selected = 3;
                 });
               },
               child: infoLanguages(
-                  // index: 3,
-                  // select: sl,
-                  check: select == 2 ? bc.isChecked3 : false,
+                  index: 3,
+                  // check: bc.isChecked3,
                   name: "Germany",
-                  icon: select == 2
-                      ? const Icon(
-                          Icons.check,
-                          color: Colors.green,
-                          size: 20,
-                        )
-                      : const SizedBox.shrink()),
+                  icon: const Icon(
+                    Icons.check,
+                    color: Colors.green,
+                    size: 20,
+                  )),
             ),
           ],
         ),
@@ -88,12 +85,12 @@ class _LanguagesState extends State<Languages> {
     );
   }
 
-  // void test(int selected) {
-  //   if (selected == sl) {}
-  // }
-
-  Widget infoLanguages(
-      {required String name, Widget? icon, bool? check, int? index, select}) {
+  Widget infoLanguages({
+    required String name,
+    Widget? icon,
+    // bool? check,
+    int? index,
+  }) {
     return Container(
       height: 56,
       margin: const EdgeInsets.only(top: 14),
@@ -106,8 +103,9 @@ class _LanguagesState extends State<Languages> {
           Expanded(
             child: Text(name, style: const TextStyle(fontSize: 16)),
           ),
-          if (check ?? false) icon ?? const SizedBox.shrink()
+          // if (check ?? false) icon ?? const SizedBox.shrink()
           // if (icon != null) icon,
+          if (selected == index) icon ?? const SizedBox.shrink(),
         ],
       ),
     );
