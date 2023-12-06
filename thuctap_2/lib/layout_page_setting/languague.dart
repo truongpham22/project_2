@@ -11,7 +11,6 @@ class Languages extends StatefulWidget {
 
 class _LanguagesState extends State<Languages> {
   widgetLogin bc = widgetLogin();
-  int selected = -1;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,16 +25,12 @@ class _LanguagesState extends State<Languages> {
             GestureDetector(
               onTap: () {
                 setState(() {
-                  selected = 1;
-                  bool isCheck = !bc.isChecked1;
-                  bc.isChecked1 = isCheck;
-                  print('viet:: $isCheck');
+                  bc.isCheck = 'vi';
                 });
               },
               child: infoLanguages(
-                  index: 1,
-                  // check: bc.isChecked1,
-                  name: "Vietnamese",
+                  check: bc.isCheck == 'vi',
+                  text: 'Vietnamese',
                   icon: const Icon(
                     Icons.check,
                     color: Colors.green,
@@ -45,16 +40,12 @@ class _LanguagesState extends State<Languages> {
             GestureDetector(
               onTap: () {
                 setState(() {
-                  selected = 2;
-                  bool isCheck = !bc.isChecked2;
-                  bc.isChecked2 = isCheck;
-                  print('engg:: $isCheck');
+                  bc.isCheck = 'en';
                 });
               },
               child: infoLanguages(
-                  index: 2,
-                  // check: bc.isChecked2,
-                  name: "English",
+                  check: bc.isCheck == 'en',
+                  text: 'English',
                   icon: const Icon(
                     Icons.check,
                     color: Colors.green,
@@ -64,15 +55,12 @@ class _LanguagesState extends State<Languages> {
             GestureDetector(
               onTap: () {
                 setState(() {
-                  bool isCheck = !bc.isChecked3;
-                  bc.isChecked3 = isCheck;
-                  selected = 3;
+                  bc.isCheck = 'ge';
                 });
               },
               child: infoLanguages(
-                  index: 3,
-                  // check: bc.isChecked3,
-                  name: "Germany",
+                  check: bc.isCheck == 'ge',
+                  text: 'Germany',
                   icon: const Icon(
                     Icons.check,
                     color: Colors.green,
@@ -85,27 +73,23 @@ class _LanguagesState extends State<Languages> {
     );
   }
 
-  Widget infoLanguages({
-    required String name,
-    Widget? icon,
-    // bool? check,
-    int? index,
-  }) {
+  Widget infoLanguages({required String text, Widget? icon, bool? check}) {
     return Container(
       height: 56,
       margin: const EdgeInsets.only(top: 14),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
           border: Border.all(color: Colors.grey),
-          borderRadius: BorderRadius.circular(10)),
+          borderRadius: const BorderRadius.all(Radius.circular(10))),
       child: Row(
         children: [
           Expanded(
-            child: Text(name, style: const TextStyle(fontSize: 16)),
-          ),
-          // if (check ?? false) icon ?? const SizedBox.shrink()
+              child: Text(
+            text,
+            style: const TextStyle(fontSize: 16),
+          )),
           // if (icon != null) icon,
-          if (selected == index) icon ?? const SizedBox.shrink(),
+          if (check ?? false) icon ?? const SizedBox.shrink(),
         ],
       ),
     );

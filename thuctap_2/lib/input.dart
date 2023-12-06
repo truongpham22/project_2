@@ -8,9 +8,11 @@ class widgetLogin {
   bool isChecked2 = false;
   bool isChecked3 = false;
   bool isChecked4 = false;
-
   final emailCtr = TextEditingController();
   final passCtr = TextEditingController();
+
+  String isCheck = 'vi';
+
   onEmailChange() {
     print(['emailCtr.', emailCtr.text]);
     emailErrorMessage =

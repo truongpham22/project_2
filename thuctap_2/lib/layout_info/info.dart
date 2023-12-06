@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:project_2/api.dart';
 import 'package:project_2/layout_page_setting/account.dart';
+import 'package:project_2/layout_page_setting/block.dart';
 import 'package:project_2/layout_page_setting/languague.dart';
 import 'package:project_2/layout_page_setting/notification.dart';
 import 'package:project_2/main.dart';
@@ -18,6 +20,20 @@ class _SettingState extends State<Setting> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: const Text('Setting'),
+        leading: GestureDetector(
+          onTap: () {
+            Navigator.of(context).pop();
+          },
+          child: const SizedBox(
+            width: 44,
+            height: 44,
+            child: Icon(
+              Icons.arrow_back,
+              size: 20,
+              color: Colors.black,
+            ),
+          ),
+        ),
       ),
       body: Form(
         child: Container(
@@ -49,8 +65,17 @@ class _SettingState extends State<Setting> {
                       "Notification", Icons.notifications, Icons.arrow_right),
                 ),
               ),
-              Container(
-                child: setting("About", Icons.question_mark, Icons.arrow_right),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const Block(),
+                      ));
+                },
+                child: Container(
+                  child: setting("Block", Icons.block, Icons.arrow_right),
+                ),
               ),
               GestureDetector(
                 onTap: () {
@@ -96,7 +121,11 @@ class _SettingState extends State<Setting> {
               Container(
                 margin: const EdgeInsets.only(top: 35),
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    setState(() {
+                      API.ins.deleteAcc(context);
+                    });
+                  },
                   style: ButtonStyle(
                       shadowColor: MaterialStatePropertyAll(Colors.white),
                       backgroundColor: MaterialStateProperty.all(Colors.white),
