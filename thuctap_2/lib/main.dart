@@ -9,6 +9,7 @@ import 'input.dart';
 void main() {
   runApp(
     const MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Login(),
     ),
   );
@@ -21,16 +22,17 @@ class Login extends StatefulWidget {
   State<Login> createState() => _LoginState();
 }
 
+widgetLogin bc = widgetLogin();
+
 class _LoginState extends State<Login> {
   @override
-  widgetLogin bc = widgetLogin();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: const Text('Login Form'),
+        automaticallyImplyLeading: false,
       ),
       body: Form(
           child: Column(

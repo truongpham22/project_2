@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_2/api.dart';
+import 'package:project_2/layout_page_home/home_layout.dart';
 import 'package:project_2/layout_page_setting/account.dart';
 import 'package:project_2/layout_page_setting/block.dart';
 import 'package:project_2/layout_page_setting/languague.dart';
@@ -20,20 +21,7 @@ class _SettingState extends State<Setting> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: const Text('Setting'),
-        leading: GestureDetector(
-          onTap: () {
-            Navigator.of(context).pop();
-          },
-          child: const SizedBox(
-            width: 44,
-            height: 44,
-            child: Icon(
-              Icons.arrow_back,
-              size: 20,
-              color: Colors.black,
-            ),
-          ),
-        ),
+        automaticallyImplyLeading: false,
       ),
       body: Form(
         child: Container(
@@ -91,6 +79,8 @@ class _SettingState extends State<Setting> {
               ),
               GestureDetector(
                 onTap: () {
+                  Navigator.of(context).pop();
+
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => const Login()),
@@ -103,7 +93,7 @@ class _SettingState extends State<Setting> {
                       Text(
                         'Log out',
                         style: TextStyle(
-                            color: Colors.blue,
+                            color: Colors.orangeAccent,
                             fontSize: 16,
                             fontWeight: FontWeight.bold),
                       ),
@@ -112,7 +102,7 @@ class _SettingState extends State<Setting> {
                       ),
                       Icon(
                         Icons.arrow_forward,
-                        color: Colors.blue,
+                        color: Colors.orangeAccent,
                       ),
                     ],
                   ),
@@ -138,7 +128,7 @@ class _SettingState extends State<Setting> {
                           EdgeInsets.symmetric(vertical: 16, horizontal: 120))),
                   child: const Text(
                     'Delete account',
-                    style: TextStyle(fontSize: 18, color: Colors.blue),
+                    style: TextStyle(fontSize: 18, color: Colors.orangeAccent),
                   ),
                 ),
               )
@@ -166,7 +156,7 @@ class _SettingState extends State<Setting> {
                   margin: const EdgeInsets.only(right: 10),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      color: Colors.blue.shade100),
+                      color: Colors.orange.shade300),
                   padding: const EdgeInsets.all(10),
                   child: Icon(iconBefore),
                 ),

@@ -61,6 +61,7 @@ class _TestState extends State<Test> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Notification'),
+        automaticallyImplyLeading: false,
         actions: [
           GestureDetector(
               onTap: () {
@@ -121,8 +122,6 @@ class _TestState extends State<Test> {
                           GestureDetector(
                               onTap: () {
                                 setState(() {
-                                  print('$index');
-                                  print('index::${list[index]['index']}');
                                   list.removeWhere((element) =>
                                       element['index'] == list[index]['index']);
                                 });

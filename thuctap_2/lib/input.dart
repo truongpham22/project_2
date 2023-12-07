@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 class widgetLogin {
   String emailErrorMessage = '';
   String passErrorMessage = '';
+
   bool isChecked1 = false;
   bool isChecked2 = false;
   bool isChecked3 = false;
@@ -12,7 +13,7 @@ class widgetLogin {
   final passCtr = TextEditingController();
 
   String isCheck = 'vi';
-
+  bool checkMode = false;
   onEmailChange() {
     print(['emailCtr.', emailCtr.text]);
     emailErrorMessage =
