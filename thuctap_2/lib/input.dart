@@ -1,7 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
+import 'package:provider/provider.dart';
 
-class widgetLogin {
+class widgetLogin with ChangeNotifier {
+  bool _checkMode = false;
+  bool get checkMode => _checkMode;
+
+  set checkMode(bool value) {
+    _checkMode = value;
+    notifyListeners();
+  }
+
   String emailErrorMessage = '';
   String passErrorMessage = '';
 
@@ -13,7 +23,6 @@ class widgetLogin {
   final passCtr = TextEditingController();
 
   String isCheck = 'vi';
-  bool checkMode = false;
   onEmailChange() {
     print(['emailCtr.', emailCtr.text]);
     emailErrorMessage =
