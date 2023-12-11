@@ -51,7 +51,6 @@ class _ChatState extends State<Chat> {
               shrinkWrap: true,
               itemCount: chats.length,
               itemBuilder: (BuildContext context, int index) {
-                print('${chats[index]['content']}');
                 return Container(
                     padding: const EdgeInsets.symmetric(
                         vertical: 20, horizontal: 10),
@@ -65,94 +64,31 @@ class _ChatState extends State<Chat> {
                           backgroundImage: NetworkImage(chats[index]['image']),
                           radius: 25,
                         ),
-                        Column(
-                          children: [
-                            Row(
-                              children: [
-                                Text(
-                                  '${chats[index]['name']}',
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                Text(
-                                  '${chats[index]['time']}',
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ],
-                            ),
-                            Text(
-                              '${chats[index]['content']}',
-                              style:
-                                  const TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                          ],
+                        Flexible(
+                          flex: 2,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  Flexible(
+                                    flex: 2,
+                                    fit: FlexFit.tight,
+                                    child: Row(children: [
+                                      Flexible(
+                                          child:
+                                              Text('${chats[index]['name']}')),
+                                    ]),
+                                  ),
+                                  Text('${chats[index]['time']}')
+                                ],
+                              ),
+                              Text('${chats[index]['content']}')
+                            ],
+                          ),
                         ),
-
-                        // Text('${chats[index]['content']}'),
-
-                        // Text(
-                        //   '${chats[index]['time']}',
-                        // )
                       ],
-                    )
-
-                    // Row(
-                    //   children: [
-                    //     CircleAvatar(
-                    //       backgroundImage: NetworkImage(chats[index]['images']),
-                    //       radius: 25,
-                    //     ),
-                    //     Container(
-                    //       margin: const EdgeInsets.only(left: 10),
-                    //       child: Column(
-                    //         children: [
-                    //           Row(
-                    //             mainAxisAlignment:
-                    //                 MainAxisAlignment.spaceBetween,
-                    //             children: [
-                    //               Text(
-                    //                 chats[index]['name'],
-                    //                 style: const TextStyle(
-                    //                     fontWeight: FontWeight.bold),
-                    //               ),
-                    //               Text(
-                    //                 chats[index]['time'],
-                    //               )
-                    //             ],
-                    //           ),
-                    //           const SizedBox(
-                    //             height: 6,
-                    //           ),
-                    //           Row(
-                    //             mainAxisAlignment:
-                    //                 MainAxisAlignment.spaceBetween,
-                    //             children: [
-                    //               SizedBox(
-                    //                 width: 110,
-                    //                 child: Text(
-                    //                   chats[index]['content'],
-                    //                   overflow: TextOverflow.ellipsis,
-                    //                 ),
-                    //               ),
-                    //               // const CircleAvatar(
-                    //               //   backgroundColor: Colors.red,
-                    //               //   radius: 10,
-                    //               //   child: Text(
-                    //               //     '2',
-                    //               //     style: TextStyle(
-                    //               //         fontSize: 14,
-                    //               //         color: Colors.white),
-                    //               //   ),
-                    //               // )
-                    //             ],
-                    //           )
-                    //         ],
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
-                    );
+                    ));
               }),
         ],
       ),
