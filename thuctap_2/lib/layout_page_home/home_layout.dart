@@ -6,6 +6,7 @@ import 'package:project_2/input.dart';
 import 'package:project_2/layout_detail/detailProduct.dart';
 import 'package:project_2/layout_page_home/product.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 
 class Home extends StatefulWidget {
@@ -44,6 +45,8 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
+
+    bc = Provider.of<widgetLogin>(context, listen: false);
     result = products;
   }
 
@@ -63,123 +66,120 @@ class _HomeState extends State<Home> {
   }
 
   widgetLogin bc = widgetLogin();
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: bc.checkMode ? ThemeData.light() : ThemeData.dark(),
-      home: Scaffold(
-        appBar: AppBar(
-          toolbarHeight: !search ? null : 103,
-          automaticallyImplyLeading: false,
-          title: !search ? appBarHome() : appBarSearch(),
-          actions: [
-            GestureDetector(
-                onTap: () {
-                  setState(() {
-                    bc.checkMode = !bc.checkMode;
-                    print('${bc.checkMode}');
-                  });
-                },
-                child: !search
-                    ? Icon(Icons.dark_mode_outlined)
-                    : const SizedBox.shrink()),
-            GestureDetector(
+    return Scaffold(
+      appBar: AppBar(
+        toolbarHeight: !search ? null : 103,
+        automaticallyImplyLeading: false,
+        title: !search ? appBarHome() : appBarSearch(),
+        actions: [
+          GestureDetector(
               onTap: () {
                 setState(() {
-                  bool click = !search;
-                  search = click;
-                  print('sea la :::: {$search}');
+                  ThemeData.dark();
+                  bc.checkMode = !bc.checkMode;
                 });
               },
               child: !search
-                  ? const SizedBox(
-                      width: 50,
-                      child: Icon(
-                        Icons.search,
-                        size: 30,
-                      ),
-                    )
-                  : const SizedBox.shrink(),
-            )
-          ],
-        ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              GradientText('PiepTeam X Noel',
-                  colors: [
-                    Colors.red.shade400,
-                    Colors.yellow.shade900,
-                  ],
-                  style: GoogleFonts.rubikBubbles(fontSize: 36)),
-              Banner(
-                location: BannerLocation.topEnd,
-                message: 'Welcome Noel',
-                color: Colors.red,
-                textStyle: const TextStyle(
-                    fontStyle: FontStyle.italic, color: Colors.yellow),
-                child: Image.network(
-                    'https://cdn.vietnammoi.vn/1881912202208777/images/2022/12/21/anh-giang-sinh-3-20221221173207943.jpg?width=700'),
-              ),
-              GridView.count(
-                crossAxisCount: 2,
-                mainAxisSpacing: 20,
-                crossAxisSpacing: 8,
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                padding: const EdgeInsets.all(8),
-                children: List.generate(result.length, (index) {
-                  return GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                DetailScreen(product: result[index]),
-                          ));
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey.shade400),
-                        borderRadius: BorderRadius.circular(6),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            child: Center(
-                              child: SizedBox(
-                                width: double.maxFinite,
-                                height: double.maxFinite,
-                                child: Image.network(
-                                  result[index].img,
-                                  fit: BoxFit.cover,
-                                ),
+                  ? Icon(Icons.dark_mode_outlined)
+                  : const SizedBox.shrink()),
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                bool click = !search;
+                search = click;
+                print('sea la :::: {$search}');
+              });
+            },
+            child: !search
+                ? const SizedBox(
+                    width: 50,
+                    child: Icon(
+                      Icons.search,
+                      size: 30,
+                    ),
+                  )
+                : const SizedBox.shrink(),
+          )
+        ],
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            GradientText('PiepTeam X Noel',
+                colors: [
+                  Colors.red.shade400,
+                  Colors.yellow.shade900,
+                ],
+                style: GoogleFonts.rubikBubbles(fontSize: 36)),
+            Banner(
+              location: BannerLocation.topEnd,
+              message: 'Welcome Noel',
+              color: Colors.red,
+              textStyle: const TextStyle(
+                  fontStyle: FontStyle.italic, color: Colors.yellow),
+              child: Image.network(
+                  'https://cdn.vietnammoi.vn/1881912202208777/images/2022/12/21/anh-giang-sinh-3-20221221173207943.jpg?width=700'),
+            ),
+            GridView.count(
+              crossAxisCount: 2,
+              mainAxisSpacing: 20,
+              crossAxisSpacing: 8,
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              padding: const EdgeInsets.all(8),
+              children: List.generate(result.length, (index) {
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              DetailScreen(product: result[index]),
+                        ));
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey.shade400),
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: Center(
+                            child: SizedBox(
+                              width: double.maxFinite,
+                              height: double.maxFinite,
+                              child: Image.network(
+                                result[index].img,
+                                fit: BoxFit.cover,
                               ),
                             ),
                           ),
-                          Container(
-                            width: double.maxFinite,
-                            margin: const EdgeInsets.only(top: 10, left: 5),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(result[index].title,
-                                    style: const TextStyle(fontSize: 26)),
-                                Text(result[index].content,
-                                    style: const TextStyle(fontSize: 20)),
-                              ],
-                            ),
+                        ),
+                        Container(
+                          width: double.maxFinite,
+                          margin: const EdgeInsets.only(top: 10, left: 5),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(result[index].title,
+                                  style: const TextStyle(fontSize: 26)),
+                              Text(result[index].content,
+                                  style: const TextStyle(fontSize: 20)),
+                            ],
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                  );
-                }),
-              ),
-            ],
-          ),
+                  ),
+                );
+              }),
+            ),
+          ],
         ),
       ),
     );
@@ -193,6 +193,7 @@ class _HomeState extends State<Home> {
     return Container(
       alignment: Alignment.centerLeft,
       child: TextField(
+        style: const TextStyle(color: Colors.black),
         onChanged: (value) {
           setState(() {
             _runFilter(value);
@@ -200,14 +201,20 @@ class _HomeState extends State<Home> {
         },
         controller: textController,
         decoration: InputDecoration(
-          prefixIcon: const Icon(Icons.search),
+          prefixIcon: const Icon(
+            Icons.search,
+            color: Colors.black,
+          ),
           suffixIcon: GestureDetector(
               onTap: () {
                 setState(() {
                   search = false;
                 });
               },
-              child: const Icon(Icons.clear)),
+              child: const Icon(
+                Icons.clear,
+                color: Colors.black,
+              )),
           filled: true,
           hintText: 'Search',
           fillColor: Colors.white,

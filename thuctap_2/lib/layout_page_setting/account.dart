@@ -29,12 +29,29 @@ class _AccountState extends State<Account> {
                 radius: 50,
               ),
             ),
-            Container(
-              margin: const EdgeInsets.only(top: 15),
-              child: const Text(
-                'Phạm Bá Trường',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  margin: const EdgeInsets.only(top: 15),
+                  child: const Text(
+                    'Phạm Bá Trường',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {},
+                  child: Container(
+                    height: 30,
+                    width: 40,
+                    margin: const EdgeInsets.only(top: 11),
+                    child: const Icon(
+                      Icons.edit,
+                      size: 16,
+                    ),
+                  ),
+                )
+              ],
             ),
             Container(
                 margin: const EdgeInsets.only(top: 9),

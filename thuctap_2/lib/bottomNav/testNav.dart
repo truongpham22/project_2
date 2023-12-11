@@ -18,6 +18,7 @@ class testNav extends StatefulWidget {
 class _testNavState extends State<testNav> {
   @override
   Widget build(BuildContext context) {
+    final PageController controller = PageController();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Test Nav'),
@@ -50,13 +51,16 @@ class _testNavState extends State<testNav> {
             ), //Icon
           ),
           Positioned(
-            child: CircleAvatar(
-              radius: 10,
-              backgroundColor: Colors.red,
-              foregroundColor: Colors.white,
-              child: Text(
-                sl,
-                style: TextStyle(fontSize: 12),
+            child: Container(
+              margin: EdgeInsets.only(left: 24, top: 2),
+              child: CircleAvatar(
+                radius: 10,
+                backgroundColor: Colors.red,
+                foregroundColor: Colors.white,
+                child: Text(
+                  sl,
+                  style: TextStyle(fontSize: 12),
+                ),
               ),
             ),
           ),

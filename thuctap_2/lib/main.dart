@@ -3,16 +3,64 @@ import 'package:flutter/material.dart';
 import 'package:project_2/api.dart';
 
 import 'package:project_2/signUp.dart';
+import 'package:provider/provider.dart';
 
 import 'input.dart';
 
 void main() {
-  runApp(
-    const MaterialApp(
+  runApp(ChangeNotifierProvider(
+    create: (context) => widgetLogin(),
+    child: myApp(),
+  ));
+}
+
+class myApp extends StatelessWidget {
+  const myApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Login(),
-    ),
-  );
+      theme: ThemeData(
+          elevatedButtonTheme: ElevatedButtonThemeData(
+              style: ButtonStyle(
+            foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
+            backgroundColor:
+                MaterialStateProperty.all<Color>(Colors.blue.shade300),
+          )),
+          bottomSheetTheme: const BottomSheetThemeData(
+              backgroundColor: Color.fromARGB(255, 198, 161, 150),
+              elevation: 0),
+          appBarTheme: const AppBarTheme(color: Colors.brown),
+          colorScheme: const ColorScheme.dark(background: Colors.brown),
+          scaffoldBackgroundColor: Colors.brown,
+          floatingActionButtonTheme: const FloatingActionButtonThemeData(
+              backgroundColor: Color.fromARGB(255, 252, 151, 144)),
+          iconButtonTheme: const IconButtonThemeData(
+              style: ButtonStyle(
+            iconSize: MaterialStatePropertyAll(30),
+          )),
+          bottomAppBarTheme: const BottomAppBarTheme(
+            color: Color.fromARGB(255, 181, 134, 117),
+          )),
+      darkTheme: ThemeData(
+        elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ButtonStyle(
+          foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
+          backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+        )),
+        bottomSheetTheme: const BottomSheetThemeData(
+            backgroundColor: Color.fromARGB(255, 56, 55, 55)),
+        appBarTheme: const AppBarTheme(color: Colors.black),
+        colorScheme: const ColorScheme.dark(background: Colors.black),
+        scaffoldBackgroundColor: Colors.black,
+      ),
+      themeMode: Provider.of<widgetLogin>(context).checkMode
+          ? ThemeMode.dark
+          : ThemeMode.light,
+      home: const Login(),
+    );
+  }
 }
 
 class Login extends StatefulWidget {
@@ -26,6 +74,11 @@ widgetLogin bc = widgetLogin();
 
 class _LoginState extends State<Login> {
   @override
+  void initState() {
+    super.initState();
+    bc = Provider.of<widgetLogin>(context, listen: false);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,7 +125,7 @@ class _LoginState extends State<Login> {
               padding: const EdgeInsets.only(left: 18),
               child: Text(
                 bc.emailErrorMessage,
-                style: TextStyle(color: Colors.red),
+                style: const TextStyle(color: Colors.red),
               ),
             ),
           Container(
@@ -94,7 +147,7 @@ class _LoginState extends State<Login> {
               padding: const EdgeInsets.only(left: 18),
               child: Text(
                 bc.passErrorMessage,
-                style: TextStyle(color: Colors.red),
+                style: const TextStyle(color: Colors.red),
               ),
             ),
           Container(
@@ -210,16 +263,16 @@ class _LoginState extends State<Login> {
     return Container(
       width: 200,
       height: 40,
-      decoration: const BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: Color.fromARGB(255, 168, 193, 224),
-            spreadRadius: 0,
-            blurRadius: 26,
-            offset: Offset(0, 9),
-          )
-        ],
-      ),
+      // decoration: const BoxDecoration(
+      //   boxShadow: [
+      //     BoxShadow(
+      //       color: Color.fromARGB(255, 168, 193, 224),
+      //       spreadRadius: 0,
+      //       blurRadius: 26,
+      //       offset: Offset(0, 9),
+      //     )
+      //   ],
+      // ),
       child: ElevatedButton(
         onPressed: () {
           setState(() {
@@ -253,16 +306,16 @@ class _LoginState extends State<Login> {
   Widget loginElse(String text, Color color, IconData icon) {
     return Container(
       margin: const EdgeInsets.only(top: 12),
-      decoration: const BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: Color.fromARGB(255, 146, 176, 212),
-            spreadRadius: 0,
-            blurRadius: 20,
-            offset: Offset(0, 5),
-          )
-        ],
-      ),
+      // decoration: const BoxDecoration(
+      //   boxShadow: [
+      //     BoxShadow(
+      //       color: Color.fromARGB(255, 146, 176, 212),
+      //       spreadRadius: 0,
+      //       blurRadius: 20,
+      //       offset: Offset(0, 5),
+      //     )
+      //   ],
+      // ),
       child: TextButton(
         onPressed: () {},
         style: ButtonStyle(
