@@ -117,17 +117,20 @@ class _SettingState extends State<Setting> {
                     });
                   },
                   style: ButtonStyle(
-                      shadowColor: MaterialStatePropertyAll(Colors.white),
-                      backgroundColor: MaterialStateProperty.all(Colors.white),
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                            side: BorderSide(color: Colors.black)),
-                      ),
-                      padding: const MaterialStatePropertyAll(
-                          EdgeInsets.symmetric(vertical: 16, horizontal: 120))),
+                    shadowColor: MaterialStatePropertyAll(Colors.white),
+                    backgroundColor: MaterialStateProperty.all(Colors.white),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          side: BorderSide(color: Colors.black)),
+                    ),
+                    padding: const MaterialStatePropertyAll(
+                      EdgeInsets.symmetric(vertical: 16, horizontal: 50),
+                    ),
+                  ),
                   child: const Text(
                     'Delete account',
+                    maxLines: 1,
                     style: TextStyle(fontSize: 18, color: Colors.orangeAccent),
                   ),
                 ),

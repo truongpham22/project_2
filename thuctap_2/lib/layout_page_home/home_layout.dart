@@ -76,15 +76,16 @@ class _HomeState extends State<Home> {
         title: !search ? appBarHome() : appBarSearch(),
         actions: [
           GestureDetector(
-              onTap: () {
-                setState(() {
-                  ThemeData.dark();
-                  bc.checkMode = !bc.checkMode;
-                });
-              },
-              child: !search
-                  ? Icon(Icons.dark_mode_outlined)
-                  : const SizedBox.shrink()),
+            onTap: () {
+              setState(() {
+                ThemeData.dark();
+                bc.checkMode = !bc.checkMode;
+              });
+            },
+            child: !search
+                ? const Icon(Icons.dark_mode_outlined)
+                : const SizedBox.shrink(),
+          ),
           GestureDetector(
             onTap: () {
               setState(() {
