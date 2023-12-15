@@ -5,7 +5,7 @@ import 'package:project_2/layout_page_setting/account.dart';
 import 'package:project_2/layout_page_setting/block.dart';
 import 'package:project_2/layout_page_setting/languague.dart';
 import 'package:project_2/layout_page_setting/notification.dart';
-import 'package:project_2/main.dart';
+import 'package:project_2/MainApp.dart';
 
 class Setting extends StatefulWidget {
   const Setting({super.key});

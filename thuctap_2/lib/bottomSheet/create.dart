@@ -87,10 +87,11 @@ class _CreateState extends State<Create> {
                 padding:
                     const EdgeInsets.symmetric(vertical: 50, horizontal: 160),
                 decoration: BoxDecoration(
-                    border: Border.all(
-                  style: BorderStyle.solid,
-                  color: Colors.grey,
-                )),
+                  border: Border.all(
+                    style: BorderStyle.solid,
+                    color: Colors.grey,
+                  ),
+                ),
                 child: const Icon(
                   Icons.image_search,
                   size: 56,

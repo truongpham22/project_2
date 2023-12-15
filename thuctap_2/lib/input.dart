@@ -23,6 +23,8 @@ class widgetLogin with ChangeNotifier {
   final passCtr = TextEditingController();
 
   String isCheck = 'vi';
+
+  String checkSize = 's';
   onEmailChange() {
     print(['emailCtr.', emailCtr.text]);
     emailErrorMessage =

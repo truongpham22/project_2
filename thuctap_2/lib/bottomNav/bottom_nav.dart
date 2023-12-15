@@ -131,15 +131,6 @@ class _BottomNavState extends State<BottomNav> {
                 )
               ],
             ),
-            // IconButton(
-            //   icon: const Icon(
-            //     Icons.message,
-            //     color: Colors.white,
-            //   ),
-            //   onPressed: () {
-            //     _onTapItem(1);
-            //   },
-            // ),
             IconButton(
               icon: const Icon(
                 Icons.notifications_sharp,

@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 
 class Product {
   final String title;
-  final String content;
+  final String price;
   final String img;
+  final String content;
 
   Product(
     this.title,
-    this.content,
+    this.price,
     this.img,
+    this.content,
   );
 }

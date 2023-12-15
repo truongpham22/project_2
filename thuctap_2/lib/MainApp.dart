@@ -1,5 +1,5 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:project_2/SplashScreen.dart';
 import 'package:project_2/api.dart';
 
 import 'package:project_2/signUp.dart';
@@ -58,7 +58,7 @@ class myApp extends StatelessWidget {
       themeMode: Provider.of<widgetLogin>(context).checkMode
           ? ThemeMode.dark
           : ThemeMode.light,
-      home: const Login(),
+      home: SplashScreen(),
     );
   }
 }

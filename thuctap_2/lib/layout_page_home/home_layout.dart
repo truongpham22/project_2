@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:project_2/bottomNav/bottom_nav.dart';
 import 'package:project_2/input.dart';
 import 'package:project_2/layout_detail/detailProduct.dart';
 import 'package:project_2/layout_page_home/product.dart';
@@ -21,24 +20,53 @@ class _HomeState extends State<Home> {
   List<Product> result = [];
   List<Product> products = [
     Product(
-      '1',
-      'a',
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIeMRty5cel1cLU5mbgLTdXadjboLBCzv_2w&usqp=CAU',
+      'BLACK CAT TEE VIVASTUDIO',
+      '850.000₫',
+      'https://bizweb.dktcdn.net/100/438/626/products/e440c314-ec02-4e0f-aa92-fd8fbe019294.jpg?v=1693050519813',
+      'Updating...',
     ),
-    Product('2', 'b',
-        'https://channel.mediacdn.vn/2020/8/10/photo-1-159704507891874912873.jpg'),
-    Product('3', 'c',
-        'https://media.istockphoto.com/id/1316145932/vi/anh/b%E1%BA%A3ng-xem-tr%C3%AAn-c%C3%B9ng-c%E1%BB%A7a-th%E1%BB%A9c-%C4%83n-cay.jpg?b=1&s=612x612&w=0&k=20&c=CRsKGypvHxxevhQQn2AO-hkzy1KBMn0sqWLUN4Dua1Q='),
-    Product('4', 'd',
-        'https://www.foodstylistvn.com/wp-content/uploads/2014/08/sausage-on-fire-vietnam-food-stylist.jpg'),
-    Product('5', 'e',
-        'https://images.squarespace-cdn.com/content/v1/53883795e4b016c956b8d243/1562815515627-WUI5RN2UL8UZPT1WLROY/chup-anh-mon-an-nha-hang-chuyen-nghiep-4.jpg'),
-    Product('6', 'f',
-        'https://chuphinhmonan.com/wp-content/uploads/2017/03/dakgalbi-1-2.jpg'),
-    Product('7', 'g',
-        'https://www.chuphinhsanpham.vn/wp-content/uploads/2016/04/chup-hinh-mon-an-dep-c-photo-0002.jpg'),
-    Product('8', 'j',
-        'https://cdn.tgdd.vn/Files/2020/06/16/1263495/food_800x450.jpg'),
+    Product(
+      'NEW BALANCE (WX608WT)',
+      '2.500.000₫',
+      'https://bizweb.dktcdn.net/100/438/626/products/8c59431f-f825-4101-bf05-3c4d067ead08.jpg?v=1702100848083',
+      'Updating...',
+    ),
+    Product(
+      'ADIDAS CAMOUFAGE - GK9615',
+      '950.000₫',
+      'https://bizweb.dktcdn.net/thumb/1024x1024/100/438/626/products/8c6cedff-49bc-4965-83a9-123ab8535cde.jpg?v=1687499134957',
+      'Updating...',
+    ),
+    Product(
+      'NIKE FUTURA ICON LOGO (AR5005 100)',
+      '950.000₫',
+      'https://bizweb.dktcdn.net/100/438/626/products/7f782a12-35f0-44ef-a33d-5cd55ab4618e.jpg?v=1679376191477',
+      'Updating...',
+    ),
+    Product(
+      'SUPREME SS20 LAUGH NOW T-SHIRT WHITE',
+      '2.500.000₫',
+      'https://bizweb.dktcdn.net/100/438/626/products/a85039c6-51de-4a3c-ab12-56d2e466625b-1659339876387.jpg?v=1659339882450',
+      'Updating...',
+    ),
+    Product(
+      'TEDDY ISLAND TEE - BIG HAWAII (21SUMER_08) - WHITE',
+      '950.000₫',
+      'https://bizweb.dktcdn.net/100/438/626/products/7f577d88-862c-4d17-ac0a-a80b91e3594b-1660823973460.jpg?v=1660824087243',
+      'Updating...',
+    ),
+    Product(
+      'MUAHMUAH STITCH TURTLE NECK T-SHIRT - B/W',
+      '950.000₫',
+      'https://bizweb.dktcdn.net/100/438/626/products/849a51e2ca2a7a0181cfd0b8512eecba-1657113295824.jpg?v=1686645494357',
+      'Updating...',
+    ),
+    Product(
+      'COVERNAT ARCH LOGO T-SHIRTS WHITE',
+      '450.000₫',
+      'https://bizweb.dktcdn.net/100/438/626/products/1a7cd18a-06fd-4d3b-bcac-13244396504d.jpg?v=1655128138510',
+      'Updating...',
+    ),
   ];
 
   TextEditingController textController = TextEditingController();
@@ -109,28 +137,34 @@ class _HomeState extends State<Home> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            GradientText('PiepTeam X Noel',
-                colors: [
-                  Colors.red.shade400,
-                  Colors.yellow.shade900,
-                ],
-                style: GoogleFonts.rubikBubbles(fontSize: 36)),
+            GradientText(
+              'PiepClothing',
+              colors: [
+                Colors.red.shade400,
+                Colors.yellow.shade900,
+              ],
+              style: GoogleFonts.rubikBubbles(fontSize: 36),
+            ),
             Banner(
               location: BannerLocation.topEnd,
               message: 'Welcome Noel',
               color: Colors.red,
               textStyle: const TextStyle(
                   fontStyle: FontStyle.italic, color: Colors.yellow),
-              child: Image.network(
-                  'https://cdn.vietnammoi.vn/1881912202208777/images/2022/12/21/anh-giang-sinh-3-20221221173207943.jpg?width=700'),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(18),
+                child: Image.network(
+                    'https://img.lovepik.com/photo/40093/5006.jpg_wh860.jpg'),
+              ),
             ),
             GridView.count(
               crossAxisCount: 2,
-              mainAxisSpacing: 20,
+              mainAxisSpacing: 90,
               crossAxisSpacing: 8,
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
-              padding: const EdgeInsets.all(8),
+              padding:
+                  const EdgeInsets.only(bottom: 100, left: 8, right: 8, top: 8),
               children: List.generate(result.length, (index) {
                 return GestureDetector(
                   onTap: () {
@@ -141,41 +175,43 @@ class _HomeState extends State<Home> {
                               DetailScreen(product: result[index]),
                         ));
                   },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey.shade400),
-                      borderRadius: BorderRadius.circular(6),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          child: Center(
-                            child: SizedBox(
-                              width: double.maxFinite,
-                              height: double.maxFinite,
-                              child: Image.network(
-                                result[index].img,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          ),
+                  child: Stack(
+                    clipBehavior: Clip.none,
+                    children: [
+                      SizedBox(
+                        child: Image.network(
+                          result[index].img,
+                          fit: BoxFit.cover,
                         ),
-                        Container(
-                          width: double.maxFinite,
-                          margin: const EdgeInsets.only(top: 10, left: 5),
+                      ),
+                      Positioned(
+                        bottom: -66,
+                        child: SizedBox(
+                          width: 200,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(result[index].title,
-                                  style: const TextStyle(fontSize: 26)),
-                              Text(result[index].content,
-                                  style: const TextStyle(fontSize: 20)),
+                              Text(
+                                result[index].title,
+                                overflow: TextOverflow.ellipsis,
+                                style: const TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              Text(
+                                result[index].price,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  color: Color.fromARGB(255, 45, 156, 247),
+                                  fontSize: 16,
+                                ),
+                              ),
                             ],
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 );
               }),

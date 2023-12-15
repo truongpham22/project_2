@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:project_2/bottomNav/bottom_nav.dart';
 import 'package:project_2/layout_info/info.dart';
-import 'package:project_2/main.dart';
+import 'package:project_2/MainApp.dart';
 
 final dio = Dio();
 
